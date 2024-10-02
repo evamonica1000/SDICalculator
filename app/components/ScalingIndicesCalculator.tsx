@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ScalingIndicesCalculator = () => {
   const [inputs, setInputs] = useState({
@@ -18,10 +17,6 @@ const ScalingIndicesCalculator = () => {
     psi: number;
     sdsi: number;
   } | null>(null);
-
-  const [graphData, setGraphData] = useState([
-    { name: 'Initial', LSI: 0, RSI: 0, PSI: 0 },
-  ]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
@@ -49,11 +44,6 @@ const ScalingIndicesCalculator = () => {
     const sdsi = lsi;
 
     setResults({ rsi, lsi, psi, sdsi });
-
-    setGraphData(prevData => [
-      ...prevData,
-      { name: `Calc ${prevData.length}`, LSI: lsi, RSI: rsi, PSI: psi }
-    ]);
   };
 
   const resetCalculator = () => {
@@ -65,7 +55,6 @@ const ScalingIndicesCalculator = () => {
       pH: '',
     });
     setResults(null);
-    setGraphData([{ name: 'Initial', LSI: 0, RSI: 0, PSI: 0 }]);
   };
 
   return (
@@ -149,22 +138,6 @@ const ScalingIndicesCalculator = () => {
           </div>
         </div>
       )}
-
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Graph</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={graphData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="LSI" stroke="#8884d8" />
-            <Line type="monotone" dataKey="RSI" stroke="#82ca9d" />
-            <Line type="monotone" dataKey="PSI" stroke="#ffc658" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
     </div>
   );
 };
