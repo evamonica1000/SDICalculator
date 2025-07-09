@@ -1,4 +1,5 @@
 import './globals.css'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'SDI Testing Software - ZEKINDO',
@@ -14,14 +15,15 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="min-h-screen bg-blue-900 bg-opacity-80 flex flex-col text-black">
-          <header className="bg-blue-800 text-white p-4">
-            <div className="flex items-center space-x-3">
-              <img 
+          <header className="bg-white shadow-md py-6 px-4">
+            <div className="flex items-center justify-start">
+              <Image 
                 src="/logo.png" 
                 alt="ZEKINDO Logo" 
-                className="h-8 w-auto"
+                width={200}
+                height={80}
+                className="h-16 w-auto"
               />
-              <h1 className="text-2xl font-bold">ZEKINDO</h1>
             </div>
           </header>
           <main className="flex-grow container mx-auto px-4 py-8">
