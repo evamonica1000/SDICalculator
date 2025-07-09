@@ -98,34 +98,51 @@ const SDICalculator = () => {
     const tf = parseFloat(timingData.tf);
     const totalDuration = parseFloat(timingData.totalDuration);
 
-    if (ti && tf && totalDuration && tf > ti) {
-      const sdi = ((1 - ti / tf) * 100) / totalDuration;
-      
-      let interpretation = '';
-      let recommendation = '';
-      let color = '';
-
-      if (sdi < 3) {
-        interpretation = 'Low fouling potential';
-        recommendation = 'Water is suitable for RO or NF systems without additional pre-treatment.';
-        color = 'text-green-600';
-      } else if (sdi >= 3 && sdi <= 5) {
-        interpretation = 'Moderate fouling potential';
-        recommendation = 'Pre-treatment such as media filters or ultrafiltration may be required.';
-        color = 'text-yellow-600';
-      } else {
-        interpretation = 'High fouling potential';
-        recommendation = 'Significant pre-treatment is necessary, such as coagulation, sedimentation, or advanced filtration.';
-        color = 'text-red-600';
-      }
-
-      setResults({
-        sdi: parseFloat(sdi.toFixed(2)),
-        interpretation,
-        recommendation,
-        color
-      });
+    // Validation
+    if (!ti || !tf || !totalDuration) {
+      alert('Please enter all timing values (Ti, Tf, and Total Duration)');
+      return;
     }
+
+    if (tf <= ti) {
+      alert('Final time (Tf) must be greater than initial time (Ti)');
+      return;
+    }
+
+    if (ti <= 0 || tf <= 0 || totalDuration <= 0) {
+      alert('All timing values must be positive numbers');
+      return;
+    }
+
+    // Calculate SDI
+    const sdi = ((1 - ti / tf) * 100) / totalDuration;
+    
+    let interpretation = '';
+    let recommendation = '';
+    let color = '';
+
+    if (sdi < 3) {
+      interpretation = 'Low fouling potential';
+      recommendation = 'Water is suitable for RO or NF systems without additional pre-treatment.';
+      color = 'text-green-600';
+    } else if (sdi >= 3 && sdi <= 5) {
+      interpretation = 'Moderate fouling potential';
+      recommendation = 'Pre-treatment such as media filters or ultrafiltration may be required.';
+      color = 'text-yellow-600';
+    } else {
+      interpretation = 'High fouling potential';
+      recommendation = 'Significant pre-treatment is necessary, such as coagulation, sedimentation, or advanced filtration.';
+      color = 'text-red-600';
+    }
+
+    setResults({
+      sdi: parseFloat(sdi.toFixed(2)),
+      interpretation,
+      recommendation,
+      color
+    });
+
+    console.log('SDI Calculated:', sdi); // Debug log
   };
 
   const resetCalculator = () => {
@@ -147,7 +164,7 @@ const SDICalculator = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
+    <div style={{backgroundColor: 'white', padding: '24px', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'}}>
       {/* Test Information Section */}
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4 text-blue-700">TEST INFORMATION</h2>
