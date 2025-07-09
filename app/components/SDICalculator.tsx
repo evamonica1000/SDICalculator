@@ -7,7 +7,6 @@ const SDICalculator = () => {
     sampleSource: '',
     operator: '',
     testDate: new Date().toISOString().split('T')[0],
-    membraneType: '0.45 μm',
     pressure: '30',
     temperature: '25'
   });
@@ -150,7 +149,6 @@ const SDICalculator = () => {
       sampleSource: '',
       operator: '',
       testDate: new Date().toISOString().split('T')[0],
-      membraneType: '0.45 μm',
       pressure: '30',
       temperature: '25'
     });
@@ -199,17 +197,6 @@ const SDICalculator = () => {
               value={testInfo.testDate}
               onChange={handleTestInfoChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Membrane Type</label>
-            <input
-              type="text"
-              name="membraneType"
-              value={testInfo.membraneType}
-              onChange={handleTestInfoChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              readOnly
             />
           </div>
           <div>
@@ -347,9 +334,6 @@ const SDICalculator = () => {
             <div className="bg-white p-4 rounded-lg shadow">
               <div className="text-3xl font-bold text-blue-800 mb-2">
                 SDI = {results.sdi}
-              </div>
-              <div className="text-sm text-gray-600">
-                Formula: SDI = ((1 - Ti/Tf) × 100) / T
               </div>
             </div>
             
