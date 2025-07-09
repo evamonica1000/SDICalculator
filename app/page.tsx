@@ -9,7 +9,7 @@ export default function Home() {
         <h2 className="text-2xl font-semibold mb-4 text-blue-700">Overview</h2>
         <p className="mb-4 text-gray-800">
           This software helps water treatment engineers perform SDI (Silt Density Index) testing to assess the fouling potential of feed water 
-          for reverse osmosis (RO) and nanofiltration (NF) membrane systems. The SDI test measures the rate of plugging of a standard 0.45 μm 
+          for reverse osmosis (RO), ultrafiltration (UF), and nanofiltration (NF) membrane systems. The SDI test measures the rate of plugging of a standard 0.45 μm 
           membrane filter under specified conditions.
         </p>
       </section>
@@ -25,19 +25,6 @@ export default function Home() {
           <li>Review the interpretation and recommended actions based on the SDI result.</li>
         </ol>
       </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4 text-blue-700">SDI Calculation Formula</h2>
-        <div className="bg-gray-100 p-4 rounded-md mb-4">
-          <p className="text-center font-mono text-lg">SDI = ((1 - Ti/Tf) × 100) / T</p>
-        </div>
-        <div className="text-sm text-gray-600 space-y-1">
-          <p><strong>Ti:</strong> Initial time for 500 mL filtration (in seconds)</p>
-          <p><strong>Tf:</strong> Final time for 500 mL filtration after test duration (in seconds)</p>
-          <p><strong>T:</strong> Total test duration (usually 15 minutes)</p>
-        </div>
-      </section>
-
       <SDICalculator />
     </div>
   );
